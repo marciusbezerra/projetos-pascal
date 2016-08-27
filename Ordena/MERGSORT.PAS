@@ -1,0 +1,65 @@
+PROGRAM MERGE;
+USES CRT;
+CONST K=100;
+TYPE VET=ARRAY[1..K] OF INTEGER;
+VAR A,B:VET;
+    I,N,M,J:INTEGER;
+
+
+PROCEDURE MERGESORT (VAR B:VET;N:INTEGER);
+VAR IL1,IL2,IL:INTEGER;
+    L1,L2:VET;
+    N1,N2,I:INTEGER;
+
+BEGIN
+  IF N=1 THEN EXIT
+  ELSE
+  BEGIN
+  FOR I:=1 TO N DIV 2 DO
+    L1[I]:=B[I];
+  N1:=N DIV 2;
+  FOR I:=(N DIV 2) + 1 TO N DO
+    L2[I-N DIV 2]:=B[I];
+  N2:=N-N DIV 2;
+  MERGESORT(L1,N1);
+  MERGESORT(L2,N2);
+  IL1:=1;IL2:=1;IL:=1;
+  WHILE (IL1<=N1) OR (IL2<=N2) DO
+  BEGIN
+    IF L1[IL1]<=L2[IL2] THEN
+    BEGIN
+      B[IL]:=L1[IL1];
+      IL:=IL+1;
+      IL1:=IL1+1;
+    END
+    ELSE
+    BEGIN
+      B[IL]:=L2[IL2];
+      IL:=IL+1;
+      IL2:=IL2+1;
+    END;
+    IF IL1>N1 THEN L1[IL1]:=MAXINT;
+    IF IL2>N2 THEN L2[IL2]:=MAXINT;
+  END;
+  END;
+END;
+
+BEGIN
+  CLRSCR;
+  WRITE('ENTRE COM O TAMANHO DO VETOR : ');
+  READLN(M);
+  FOR J:=1 TO M DO
+  BEGIN
+    WRITE('A [ ', J ,' ] = ');
+    READLN(A[J]);
+  END;WRITELN;
+  MERGESORT(A,M);
+  FOR J:=1 TO M DO
+    WRITELN('A [ ', J , ' ] = ', A[J]);
+  READKEY;
+END.
+
+
+
+
+

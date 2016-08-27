@@ -1,0 +1,17 @@
+cmenu  = 15
+fmenu  = 9
+cbarra = 15
+fbarra = 1
+cdestaq= 14
+cstatus= 15
+fstatus= 1
+ctitulo= 1
+ftitulo= 15
+cerro  = 15
+ferro  = 4
+cdesk  = 15
+fdesk  = 7
+Msaver = FARMACIA[PAULI
+TimeSvr= 50
+font   = 1
+[fim]

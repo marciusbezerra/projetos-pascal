@@ -1,0 +1,69 @@
+PROGRAM ORDENACAO1;
+USES CRT;
+
+TYPE VET=ARRAY[0..300] OF INTEGER;
+VAR X,N:INTEGER;
+    B,A,AA:VET;
+
+PROCEDURE INSERCAO(VAR B:VET;M:INTEGER);
+VAR I,J,MENOR:LONGINT;
+BEGIN
+  FOR I:=2 TO M DO
+  BEGIN
+    B[0]:=B[I];
+    J:=I-1;
+  END;
+  WHILE B[0]<B[J] DO
+  BEGIN
+    B[J+1]:=B[J];
+    J:=J-1;
+  END;
+  B[J+1]:=B[0];
+END;
+
+PROCEDURE SHELLSORT(VAR AA:VET);
+LABEL 99;
+VAR I,J,H:INTEGER;
+
+BEGIN
+  H:=1;
+  REPEAT H:=3*H + 1 UNTIL H>N;
+  REPEAT
+    H:=H DIV 3;
+    INSERCAO(AA,H);
+    FOR I:=H+1 TO N DO
+    BEGIN
+      X:=AA[I];
+      J:=I;
+      WHILE AA[J-H]>X DO
+      BEGIN
+        AA[J]:=AA[J-H];
+        J:=J-H;
+        IF J<=H THEN GOTO 99;
+      END;
+    99:
+    AA[J]:=X;
+   END;
+  UNTIL H=1;
+END;
+
+BEGIN
+  CLRSCR;
+  WRITE('ENTRE COM A QUANTIDADE DE NUMEROS QUE DESEJA INSERIR : ');
+  READLN(N);
+  FOR X:=0 TO N DO
+  BEGIN
+    IF X=0 THEN
+      A[0]:=0
+    ELSE
+    BEGIN
+      WRITE(' A [ ', X , ' ] = ');
+      READLN(A[X]);
+    END;
+  END;WRITELN;
+  SHELLSORT(A);
+  WRITELN;
+  FOR X:=1 TO N DO
+  WRITELN(' A [ ', X , ' ] = ',A[X]);
+  READKEY;
+END.
